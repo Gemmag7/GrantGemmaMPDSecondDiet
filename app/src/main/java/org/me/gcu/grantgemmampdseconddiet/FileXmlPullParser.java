@@ -80,7 +80,9 @@ public class FileXmlPullParser {
                             String title = xpp.nextText();
                             String[] splitTitle = title.split(", ");
                             currentItem.getDay().add(splitTitle[0].split(": ")[0]);
+                           // System.out.println(currentItem.getDay().add(splitTitle[0].split(": ")[0]));
                             currentItem.getCondition().add(splitTitle[0].split(": ")[1]);
+                            System.out.println(currentItem.getCondition().add(splitTitle[0].split(": ")[1]));
                     } else if (xpp.getName().equalsIgnoreCase("description") && insideOfItem) {
                         String description = xpp.nextText();
                         String[] descriptionDetails = description.split(", ");
@@ -106,7 +108,7 @@ public class FileXmlPullParser {
                             } else if(descriptionDetails[j].startsWith(detailTitles[4])){
                                 currentItem.getVisibility().add(detailTitles[4] + ": " +descriptionDetails[j].split(": ")[1]);
                             } else if(descriptionDetails[j].startsWith(detailTitles[5])){
-                                currentItem.getPressure().add(detailTitles[5] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getPressure().add(descriptionDetails[j].split(": ")[1]);
                             } else if(descriptionDetails[j].startsWith(detailTitles[6])){
                                 currentItem.getHumidity().add(detailTitles[6] + ": " +descriptionDetails[j].split(": ")[1]);
                             } else if(descriptionDetails[j].startsWith(detailTitles[7])){

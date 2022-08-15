@@ -11,6 +11,10 @@
     android:layout_height="match_parent"
     android:id="@+id/body_container">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_view" />
 
        <!-- <TextView
             android:id="@+id/salutation"
@@ -28,19 +32,23 @@
             />
 
 
-        <TextView
-            android:id="@+id/rawDataDisplay"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="Raw Data is Displayed here"
-            />
+
 
        <!-- <ListView
             android:id="@+id/list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/> -->
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/parsedList"
+        app:layout_constraintTop_toBottomOf="@+id/startButton"
+        />
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

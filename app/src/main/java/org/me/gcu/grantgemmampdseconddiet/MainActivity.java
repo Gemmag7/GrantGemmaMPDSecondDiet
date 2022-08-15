@@ -37,6 +37,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -69,19 +70,20 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     private Handler mHandler;
     //the bottom navigation view
     BottomNavigationView navigationView;
-    private TextView rawDataDisplay;
+    //private TextView rawDataDisplay;
+    private TextView titleText;
     private Button startButton;
     private String result = "";
     private String url1="";
     // BBC Weather XML link
     private String urlSource="https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
-   // private ArrayList<WeatherItem> items = new ArrayList<>();
     private String baseUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/";
     private String[] locationIDs = new String[]{"2648579", "2643743", "5128581", "287286", "934154", "1185241"};
     private String[] locationNames = new String[]{"Glasgow", "London", "New York", "Oman", "Mauritius", "Bangladesh"};
     private ArrayList<Item> items = new ArrayList<>();
 
     ListView listView;
+    //ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -93,12 +95,13 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
        //
         Log.e("MyTag","in onCreate");
         // Set up the raw links to the graphical components
-        rawDataDisplay = (TextView)findViewById(R.id.rawDataDisplay);
+       // rawDataDisplay = (TextView)findViewById(R.id.rawDataDisplay);
         startButton = (Button)findViewById(R.id.startButton);
         startButton.setOnClickListener(this);
-        //listView = (ListView) findViewById(R.id.list);
+        //titleText = (TextView) findViewById(R.id.titleTxt);
         navigationView = findViewById(R.id.bottom_navigation);
 
+        listView = (ListView) findViewById(R.id.parsedList);
 
         /**
          * This function allows the user switch from one view in the navigation menu to another
@@ -122,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                         break;
                     case R.id.nav_weather:
                         //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                        fragment = new WeatherFragment();
+                        fragment = new ListFragment();
 
                         break;
                     case R.id.nav_search:
@@ -151,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
     {
         Log.e("MyTag","in onClick");
         runApp();
+        listView.setVisibility(View.VISIBLE);
         Log.e("MyTag","after runApp");
     }
     // Need separate thread to access the internet resource over network
@@ -218,88 +222,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
             {
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
-                    rawDataDisplay.setText(result);
+                    //rawDataDisplay.setText(result);
                     //calling the parseData method to display the parsed data
                     //parseData(result);
-                    FileXmlPullParser.parseData(result);
+                  //  FileXmlPullParser.parseData(result);
+                    parser.parseData(result);
                 }
             });
         }
 
     }
 
-    /**
-     * ParseData method accepts the string data and parses it into an array
-     * @param dataToParse is the results passed in from the downlaoded xml file
-     */
-    private void parseData(String dataToParse) {
 
-        Log.d("startParseTAG", "here ");
-        Log.d("dataToParse", dataToParse + " ");
-        //try {
-          //  Log.d("In TRY", "TRY in parseDATA method");
-            /**XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            factory.setNamespaceAware(true);
-            XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(new StringReader(dataToParse));
-            int eventType = xpp.next();
-             eventType = xpp.getEventType();**/
-             FileXmlPullParser.parseData(dataToParse);
-           // Log.d("eventType", eventType + " ");
-
-            //Declaring all variables needed
-            //boolean insideOfItem = false;
-           // String tempTitle = "";
-            //String tempDescription = "";
-
-           /** while (eventType != XmlPullParser.END_DOCUMENT) {
-
-                if (eventType == XmlPullParser.START_TAG) {
-                    if (xpp.getName().equals("item")) {
-
-                        insideOfItem = true;
-
-                    } else if (xpp.getName().equalsIgnoreCase("title")) {
-                        if (insideOfItem) {
-                            tempTitle = xpp.nextText();
-                            Log.d("tempTitle", tempTitle + " ");
-                        }
-                    } else if (xpp.getName().equalsIgnoreCase("description")) {
-                        if (insideOfItem) {
-                            tempDescription = xpp.nextText();
-
-                        }
-
-                    } else if (eventType == XmlPullParser.END_TAG
-                            && xpp.getName().equalsIgnoreCase("item")) {
-                        insideOfItem = false;
-
-
-                        //passing in  all of the temporary attributes of an item into the constructor in the Item class
-                        Item newItem = new Item(tempTitle, tempDescription);
-
-                        //Once the newItem has been created, it is then added to the items list
-                        items.add(newItem);
-                        Log.d("newItem", newItem + " ");
-
-                 Log.d("Items: ", items + " ");
-                    }// end of ELSE IF statment
-                    eventType = xpp.next();
-
-                }// End of IF STATEMENT
-            }//End of WHILE LOOP
-        }// End of TRY
-        catch (XmlPullParserException e)
-        {
-            Log.e("MyTag","Parsing failed. Reason: " + e.getMessage());
-        }
-        catch (IOException e)
-        {
-            Log.e("MyTag","Error: "+ e.getMessage());
-        }*/
-
-
-    } //End parseData
 
     public InputStream getInputStream(URL url){
         try {
@@ -361,7 +295,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 }
 
 
-                parseData(result);
+               // FileXmlPullParser.parseData(result);
+                parser.parseData(result);
             }
             catch (InterruptedException e)
             {
@@ -377,40 +312,36 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 @Override
                 public void run()
                 {
-
+                    Log.d("ItemList" , ": " + parser.items);
+                    Log.d("ItemList" , ": " + items);
                     //creating a new fragment transaction and beginning it
-                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                   // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    //fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                     //creating a new instance of the list fragment here
-                    WeatherFragment wFragment = new WeatherFragment();
+                    //HomeFragment hFragment = new HomeFragment();
 
+                    //TextView titleText = (TextView) convertView.findViewById(R.id.titleTxt);
+                    //titleText.setText(title);
                     //Create a new bundle which we will be used to pass in the list of items into the list view fragment
-                    Bundle bundle = new Bundle();
+                    //Bundle bundle = new Bundle();
                     //outSerializable sets the items list to the list view fragment
-                    bundle.putSerializable("ITEMLIST", items);
+                    //bundle.putSerializable("ITEMLIST", FileXmlPullParser.items);
 
                     Log.e("items list" ,": " + items);
-                    Log.e("count" ,": " + items.size());
+                    Log.e("count" ,": " + parser.items.size());
                     //Set the arguments of our fragment to bundle we created with our list
-                    wFragment.setArguments(bundle);
+                    //hFragment.setArguments(bundle);
 
-                    //Tell the activity we are swapping the frameview with our fragment
-                    fragmentTransaction.replace(R.id.body_container, wFragment);
 
-                    fragmentTransaction.addToBackStack(null);
 
-                    /**
-                     * commiting the fragment transaction
-                     * The commit() call signals to the FragmentManager that all operations have been added to the transaction.
-                     */
-                    fragmentTransaction.commit();
-                    //mProgressBar1.setProgress(currentProgressCount);
-                    //mProgressBar2.setProgress(currentProgressCount1);
+
+                    ItemAdapter adapter = new ItemAdapter(MainActivity.this, -1,parser.items);
+                    listView.setAdapter(adapter);
+
                     Log.d("post handler", "in thread");
                 }
             });
         }
-
 }).start();
 }
 }
