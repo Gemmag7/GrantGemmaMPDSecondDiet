@@ -55,11 +55,11 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         TextView locationName = convertView.findViewById(R.id.locationName);
         //locationName.setText(currentItem.getLocationName());
 
-        TextView day1 = convertView.findViewById(R.id.day1);
+        TextView day1 = (TextView) convertView.findViewById(R.id.day1);
 
         day1.setText(currentItem.getDay().get(0));
         Log.d("day1", ":" + day1);
-        TextView day2 = convertView.findViewById(R.id.day2);
+        TextView day2 = (TextView) convertView.findViewById(R.id.day2);
         day2.setText(currentItem.getDay().get(1));
         //day2.setText(currentItem.getDay().get(1));
         TextView day3 = convertView.findViewById(R.id.day3);

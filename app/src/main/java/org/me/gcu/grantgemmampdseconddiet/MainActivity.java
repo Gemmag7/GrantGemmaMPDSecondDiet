@@ -314,24 +314,33 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 {
                     Log.d("ItemList" , ": " + parser.items);
                     Log.d("ItemList" , ": " + items);
-                    //creating a new fragment transaction and beginning it
-                   // FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                    //fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                    FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
                     //creating a new instance of the list fragment here
-                    //HomeFragment hFragment = new HomeFragment();
+                    ListFragment listFragment = new ListFragment();
 
-                    //TextView titleText = (TextView) convertView.findViewById(R.id.titleTxt);
-                    //titleText.setText(title);
                     //Create a new bundle which we will be used to pass in the list of items into the list view fragment
-                    //Bundle bundle = new Bundle();
+                    Bundle bundle = new Bundle();
                     //outSerializable sets the items list to the list view fragment
-                    //bundle.putSerializable("ITEMLIST", FileXmlPullParser.items);
+                    bundle.putSerializable("ITEMLIST", parser.items);
 
-
+                    Log.e("items list" ,": " + parser.items);
                     Log.e("count" ,": " + parser.items.size());
                     //Set the arguments of our fragment to bundle we created with our list
-                    //hFragment.setArguments(bundle);
+                    listFragment.setArguments(bundle);
 
+                    //Tell the activity we are swapping the frameview with our fragment
+                    fragmentTransaction.replace(R.id.body_container, listFragment);
+
+                    fragmentTransaction.addToBackStack(null);
+
+                    /**
+                     * commiting the fragment transaction
+                     * The commit() call signals to the FragmentManager that all operations have been added to the transaction.
+                     */
+                    fragmentTransaction.commit();
 
 
 

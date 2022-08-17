@@ -24,20 +24,18 @@ import org.me.gcu.grantgemmampdseconddiet.Item;
 import java.util.ArrayList;
 
 /**
- * ListFragment class contains all view components and methods that are needed in order to display the fragment which
- * contains all of the roadworks parsed data.
- * This class makes use of the AdapterView.OnItemClickListener so that the list is interactive and the user can click
- * on an item in the list and a more detailed description of the selected roadworks
+ * ListFragment class contains all view components and methods that are needed in order to display the fragment which contains all of the weather parsed data.
+ * This class makes use of the AdapterView.OnItemClickListener so that the list is interactive and the user can click on an item in the list and
+ * a more detailed description of weather for the selected day will display
  * Created on 04/04/2022 by Gemma Grant s2030516
  */
 public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     //Initiating all view components
     private ListView parsedListView;
-    private TextView titleText, descriptionText, linkText, pubDateText;
     private ArrayList<Item> items;
     private ItemAdapter arrayAdapter;
-
+    private FileXmlPullParser parser;
     /**
      *
      * @param inflater which contains the xml file that is being inflated into the view
@@ -56,6 +54,9 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
          * checks to see if the items list is empty as well as checking to see if it is null
          * if it is not null and is not null, then the items list is set to clear
          */
+
+        Log.e("items in ListFragment", ": " + items);
+        Log.e("parser.items in ListFragment", ": " + parser.items);
         if(items != null && !items.isEmpty()) {
             items.clear();
         }
@@ -70,11 +71,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
 
         //initiating variables to view components in the fragment_list.xml file
         parsedListView = (ListView) v.findViewById(R.id.parsedListView);
-      //  titleText = (TextView) v.findViewById(R.id.titleTxt);
-        //descriptionText = (TextView) v.findViewById(R.id.descriptionTxt);
-        //linkText = (TextView) v.findViewById(R.id.linkTxt);
-        //pubDateText = (TextView) v.findViewById(R.id.pubDateTxt);
-        //SearchView searchView = (SearchView) v.findViewById(R.id.itemListSearchView);
+
 
         //Setting the arrayAdapter to the parsedListView
         parsedListView.setAdapter(arrayAdapter);
