@@ -29,34 +29,24 @@ public class ItemAdapter extends ArrayAdapter<Item> {
    // private final List<Item> items;
     int resourceInt;
 
-    /**public ItemAdapter(Context context, int resource, List<Item> items) {
-        super(context, resource, items);
-        this.items = items;
-        ctx = context;
-        resourceInt = resource;
-
-    }*/
-
-    /**public ItemAdapter(List<Item> data, @NonNull Context context) {
-        super(context, R.layout.row_item, data);
-        this.items = data;
-        this.mContext=context;
-    }*/
-
-    public ItemAdapter(Context context, int row_item, ArrayList<Item> data) {
-        super(context, R.layout.row_item, data);
+    public ItemAdapter(Context context, int resource, ArrayList<Item> data) {
+        super(context, resource, data);
         this.items = data;
         this.mContext = context;
-        resourceInt = row_item;
+        resourceInt = resource;
     }
 
 
     @NonNull
     @Override
-
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Item currentItem = getItem(position);
         Log.d("Position", ":" + currentItem);
+
+        /**
+         * Inflating the views from the layout in order to display the listview
+         */
+
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_item, parent, false);
@@ -107,5 +97,19 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
         Log.d("IN_ADAPTER" ,"convertView returned");
         return convertView;
-    }
-}
+    } // End of getView method
+
+
+    /**
+     * This method calculates the count of the number of items in the item list and returns it back to the user
+     * @return the number of items in the item list
+     */
+    @Override
+    public int getCount()
+    {
+
+        return items.size();
+
+    } // end of getCount method
+
+}// End of ItemAdapter class

@@ -327,7 +327,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                     //outSerializable sets the items list to the list view fragment
                     //bundle.putSerializable("ITEMLIST", FileXmlPullParser.items);
 
-                    Log.e("items list" ,": " + items);
+
                     Log.e("count" ,": " + parser.items.size());
                     //Set the arguments of our fragment to bundle we created with our list
                     //hFragment.setArguments(bundle);
