@@ -339,10 +339,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                     /**
                      * commiting the fragment transaction
                      * The commit() call signals to the FragmentManager that all operations have been added to the transaction.
-                     */
+                     **/
                     fragmentTransaction.commit();
-
-
 
                     ItemAdapter adapter = new ItemAdapter(MainActivity.this, -1,parser.items);
                     listView.setAdapter(adapter);

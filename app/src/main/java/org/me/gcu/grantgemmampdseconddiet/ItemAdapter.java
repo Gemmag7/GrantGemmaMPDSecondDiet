@@ -26,7 +26,6 @@ public class ItemAdapter extends ArrayAdapter<Item> {
     private List<Item> items;
     Context mContext;
     private Context ctx;
-   // private final List<Item> items;
     int resourceInt;
 
     public ItemAdapter(Context context, int resource, ArrayList<Item> data) {

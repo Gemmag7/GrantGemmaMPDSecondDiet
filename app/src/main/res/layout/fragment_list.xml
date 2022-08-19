@@ -29,8 +29,9 @@
         <ListView
             android:id="@+id/parsedListView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:smoothScrollbar="true"/>
+            android:layout_height="350dp"
+            android:smoothScrollbar="true"
+            />
 
 
     </LinearLayout>

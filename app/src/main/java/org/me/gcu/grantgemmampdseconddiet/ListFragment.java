@@ -15,11 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import org.me.gcu.grantgemmampdseconddiet.Item;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -36,6 +38,10 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
     private ArrayList<Item> items;
     private ItemAdapter arrayAdapter;
     private FileXmlPullParser parser;
+    private TextView highest_temp, lowest_temp, wind_direction, wind_speed, uv_risk, visibility_score, pressure, humidity, condition, sunset, sunrise, pollution;
+    private LinearLayout day1, day2, day3;
+
+
     /**
      *
      * @param inflater which contains the xml file that is being inflated into the view
@@ -73,6 +79,8 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         parsedListView = (ListView) v.findViewById(R.id.parsedListView);
 
 
+       // highest_temp = (TextView) v.findViewById(R.id.highest_temp);
+
         //Setting the arrayAdapter to the parsedListView
         parsedListView.setAdapter(arrayAdapter);
         parsedListView.setOnItemClickListener(this);
@@ -89,14 +97,30 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
 
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        //get the item from that index that we clicked in the listview
-        Item selectedItem = arrayAdapter.getItem(i);
+
+        @Override
+        public void onItemClick (AdapterView < ? > adapterView, View view,int i, long l){
+
+            //get the item from that index that we clicked in the listview
+            Item itemArray = arrayAdapter.getItem(i);
+
+            ArrayList<String> selectedItem = itemArray.getDay();
+
+            itemArray.getDay().get(i);
 
 
+            //Setting the textView to the values of the selected item when a user clicks on a specific incident
+            highest_temp.setText(selectedItem.get(i));
+            //lowest_temp.setText(selectedItem.getMinTemp().get(i));
+            // pressure.setText(selectedItem.getPressure().get(i));
+            //pollution.setText(selectedItem.getPollution().get(i));
+            //condition.setText(selectedItem.getCondition().get(i));
+            //sunrise.setText(selectedItem.getSunrise().get(i));
+            //sunset.setText(selectedItem.getSunset().get(i));
+            //   wind_direction.setText(selectedItem.getWindDirection().get(i));
+            //     wind_speed.setText(selectedItem.getWindSpeed().get(i));
+            //       humidity.setText(selectedItem.getHumidity().get(i));
 
-
-    } //end of onItemClick method
+        } //end of onItemClick method
 
 } //end of ListFragment class
