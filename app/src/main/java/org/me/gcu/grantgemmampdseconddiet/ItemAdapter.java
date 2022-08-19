@@ -67,25 +67,25 @@ public class ItemAdapter extends ArrayAdapter<Item> {
 
         TextView temp1 = convertView.findViewById(R.id.temp1);
         temp1.setText(currentItem.getMinTemp().get(0));
-        TextView lowest_temp = convertView.findViewById(R.id.lowest_temp);
-        lowest_temp.setText(currentItem.getMinTemp().get(0));
+       // TextView lowest_temp = convertView.findViewById(R.id.lowest_temp);
+        //lowest_temp.setText(currentItem.getMinTemp().get(0));
         TextView temp2 = convertView.findViewById(R.id.temp2);
         temp2.setText(currentItem.getMinTemp().get(1));
         TextView temp3 = convertView.findViewById(R.id.temp3);
         temp3.setText(currentItem.getMinTemp().get(2));
 
-        TextView highest_temp = convertView.findViewById(R.id.highest_temp);
-        highest_temp.setText(currentItem.getMaxTemp().get(0));
+        TextView maxTemp1 = convertView.findViewById(R.id.maxTemp1);
+        maxTemp1.setText(currentItem.getMaxTemp().get(0));
         TextView maxTemp2 = convertView.findViewById(R.id.maxTemp2);
         maxTemp2.setText(currentItem.getMaxTemp().get(0));
         TextView maxTemp3 = convertView.findViewById(R.id.maxTemp3);
         maxTemp3.setText(currentItem.getMaxTemp().get(1));
 
-        TextView rain1 = convertView.findViewById(R.id.rain1);
+        TextView rain1 = convertView.findViewById(R.id.condition1);
         rain1.setText(currentItem.getCondition().get(0));
-        TextView rain2 = convertView.findViewById(R.id.rain2);
+        TextView rain2 = convertView.findViewById(R.id.condition2);
         rain2.setText(currentItem.getCondition().get(1));
-        TextView rain3 = convertView.findViewById(R.id.rain3);
+        TextView rain3 = convertView.findViewById(R.id.condition3);
         rain3.setText(currentItem.getCondition().get(2));
 
         TextView windspeed1 = convertView.findViewById(R.id.windspeed1);

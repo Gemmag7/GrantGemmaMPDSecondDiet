@@ -39,6 +39,8 @@ public class FileXmlPullParser {
     {
         Log.d("FileXMLpullParser", "In class");
         try {
+
+            //Setting the variable factory to a new instance of the XmlPullParserFactory library
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
             XmlPullParser xpp = factory.newPullParser();
@@ -84,14 +86,20 @@ public class FileXmlPullParser {
                             currentItem.getCondition().add(splitTitle[0].split(": ")[1]);
                             System.out.println(currentItem.getCondition().add(splitTitle[0].split(": ")[1]));
                     } else if (xpp.getName().equalsIgnoreCase("description") && insideOfItem) {
+                        //Setting the variable 'description' to the next text in the item in order to obtain the weather details
                         String description = xpp.nextText();
+
+                        //Extracting the weather details from the description variable by using the .split() method
                         String[] descriptionDetails = description.split(", ");
 
+                        //Creating a detailTitles array which hiolds all of the relevant titles of each weather detail in the item data
                         String[] detailTitles = {"Maximum Temperature","Minimum Temperature", "Wind Direction","Wind Speed", "Visibility", "Pressure", "Humidity", "UV Risk", "Pollution", "Sunrise", "Sunset"
                         };
                         /**
                          * for loop used to loop through the titles of each details for each day for each location
-                         * this is done by utilising the descriptionDetails array to find the number of titles to find
+                         * this is done by utilising the descriptionDetails array to loop until the end of the descriptionDetails array
+                         * to find the relevant details for each currentItem which is then added to the items array.
+                         * This loop will complete once the end of the descriptionDetails array has ended.
                          */
                         for (int j = 0; j < descriptionDetails.length; j++) {
                             //Finds and sets the maximum temperature value to the current item that is being created
@@ -99,31 +107,40 @@ public class FileXmlPullParser {
                                 currentItem.getMaxTemp().add(descriptionDetails[j].split(": ")[1]);
                                 //Finds and sets the minimum temperature value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[1])){
-                                currentItem.getMinTemp().add(detailTitles[1] + ": " +descriptionDetails[j].split(": ")[1]);
-
+                                currentItem.getMinTemp().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the wind direction value to the current item that is being created
                             }  else if(descriptionDetails[j].startsWith(detailTitles[2])){
-                                currentItem.getWindDirection().add(detailTitles[2] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getWindDirection().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the wind speed value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[3])){
-                                currentItem.getWindSpeed().add(detailTitles[3] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getWindSpeed().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the visibility value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[4])){
-                                currentItem.getVisibility().add(detailTitles[4] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getVisibility().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the pressure value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[5])){
                                 currentItem.getPressure().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the humidity value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[6])){
-                                currentItem.getHumidity().add(detailTitles[6] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getHumidity().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the uv risk value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[7])){
-                                currentItem.getUvrisk().add(detailTitles[7] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getUvrisk().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the pollution value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[8])){
-                                currentItem.getPollution().add(detailTitles[8] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getPollution().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the sunrise value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[9])){
-                                currentItem.getSunrise().add(detailTitles[9] + ": " +descriptionDetails[j].split(": ")[1]);
+                                currentItem.getSunrise().add(descriptionDetails[j].split(": ")[1]);
+                                //Finds and sets the sunset value to the current item that is being created
                             } else if(descriptionDetails[j].startsWith(detailTitles[10])){
-                                 currentItem.getSunset().add(detailTitles[10] + ": " +descriptionDetails[j].split(": ")[1]);
+                                 currentItem.getSunset().add(descriptionDetails[j].split(": ")[1]);
                             }
-                        }
-                    }
+                        } // End of FOR LOOP
+                    } //End of checking the description tag from rss feed
 
-                }
+                } //End of checking the starting tag
+
                 /**
                  * Checks to see if the name of the xml tag is an end tag and also checks if it isd called item
                  * if so, the insideOfItem variable is set to false as we are no longer inside of the item tag
@@ -156,10 +173,7 @@ public class FileXmlPullParser {
         {
             e.printStackTrace();
         }
-
-        /**
-         * The items array list is returned back to the Main activity class in order to be used in the program further
-         */
+         // The items array list is returned back to the Main activity class in order to be used in the program further
         return items;
     } // End of parseData method
     } //end of FileXmlPullParser class
