@@ -11,10 +11,7 @@
     android:layout_height="match_parent"
     android:id="@+id/body_container">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/fragment_view" />
+
 
        <!-- <TextView
             android:id="@+id/salutation"
@@ -24,20 +21,50 @@
             android:text="Welcome to Mobile Platform Development Resit Assignment 2021-2022"
             /> -->
 
-        <Button
+        <!--<Button
             android:id="@+id/startButton"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Press to get data"
-            />
+            /> -->
 
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select a location to view weather forecast:"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/txt_label"
+        />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_selector"
+        android:background="@android:drawable/btn_dropdown"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        android:layout_below="@id/txt_label"
+        android:contentDescription="Select a location option from the dropdown menu"
+        />
+    <ListView
+        android:id="@+id/location_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_below="@+id/location_selector"
+        />
 
 
        <!-- <ListView
             android:id="@+id/list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/> -->
+            android:layout_height="wrap_content"/>
 
     <ListView
         android:layout_width="match_parent"
@@ -46,26 +73,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/parsedList"
-        app:layout_constraintTop_toBottomOf="@+id/startButton"
-        />
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/container"
-            android:layout_above="@+id/bottom_navigation"/>
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="30dp"
-            android:elevation="2dp"
-            app:menu="@menu/item_menu"
-            android:background="@drawable/round_corner"
-            app:itemRippleColor="@android:color/transparent"
-            app:itemIconSize="30dp"
-            app:labelVisibilityMode="unlabeled"
-            app:itemIconTint="@drawable/item_selection"
-            android:id="@+id/bottom_navigation"
-            />
-    </RelativeLayout>
+        android:id="@+id/parsedList"-->
+
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!--<com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="30dp"
+        android:elevation="2dp"
+        app:menu="@menu/item_menu"
+        android:background="@drawable/round_corner"
+        app:itemRippleColor="@android:color/transparent"
+        app:itemIconSize="30dp"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@drawable/item_selection"
+        android:id="@+id/bottom_navigation"
+        />-->
+</RelativeLayout>

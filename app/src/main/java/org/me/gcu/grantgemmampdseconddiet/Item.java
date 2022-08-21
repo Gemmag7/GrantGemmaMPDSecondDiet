@@ -13,9 +13,9 @@ public class Item {
 
 
     /**
-     * Declaring the day array list that will hold all data relating to the particular day that the user selects
+     * Declaring the item array list that will hold all data relating to the particular day that the user selects
      */
-    private ArrayList<String> day = new ArrayList<>(), minTemp = new ArrayList<>(),  maxTemp = new ArrayList<>(), windSpeed = new ArrayList<>(), Pressure = new ArrayList<>(), Humidity = new ArrayList<>(), uv_risk = new ArrayList<>(), condition = new ArrayList<>(), windDirection = new ArrayList<>(), Visibility = new ArrayList<>(), Pollution = new ArrayList<>(), sunrise = new ArrayList<>(), sunset = new ArrayList<>();
+    private ArrayList<String> day = new ArrayList<>(), minTemp = new ArrayList<>(),  maxTemp = new ArrayList<>(), windSpeed = new ArrayList<>(), Pressure = new ArrayList<>(), Humidity = new ArrayList<>(), uv_risk = new ArrayList<>(), condition = new ArrayList<>(), windDirection = new ArrayList<>(), Visibility = new ArrayList<>(), Pollution = new ArrayList<>(), sunrise = new ArrayList<>(), sunset = new ArrayList<>(), location = new ArrayList<>();
 
 
     public ArrayList<String> getDay() {
@@ -122,7 +122,13 @@ public class Item {
         this.sunset = sunset;
     }
 
+    public ArrayList<String> getLocation() {
+        return location;
+    }
 
+    public void setLocation(ArrayList<String> location) {
+        this.location = location;
+    }
 
     /**
      * Empty Constructor for an item.

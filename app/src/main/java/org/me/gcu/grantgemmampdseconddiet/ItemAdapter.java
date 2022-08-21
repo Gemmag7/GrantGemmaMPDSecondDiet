@@ -13,7 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /*
@@ -51,8 +54,12 @@ public class ItemAdapter extends ArrayAdapter<Item> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_item, parent, false);
         }
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        //get current date time with Date()
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
         TextView locationName = convertView.findViewById(R.id.locationName);
-        //locationName.setText(currentItem.getLocationName());
+        locationName.setText((CharSequence) currentItem.getLocation());
 
         TextView day1 = (TextView) convertView.findViewById(R.id.day1);
 
