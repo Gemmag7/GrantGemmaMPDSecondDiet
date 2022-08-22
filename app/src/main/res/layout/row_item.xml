@@ -41,6 +41,7 @@
         android:textColor="#2196F3"
         android:textSize="38sp"
         android:textStyle="bold"
+
         app:layout_constraintBottom_toTopOf="@+id/table_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +79,8 @@
                 android:text="Day "
                 android:textAllCaps="true"
                 android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/textView2"

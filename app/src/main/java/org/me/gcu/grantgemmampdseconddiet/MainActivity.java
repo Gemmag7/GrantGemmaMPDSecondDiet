@@ -30,8 +30,7 @@ import java.util.ArrayList;
  * Created by Gemma Grant s2030516
  * On 07/07/2022
  */
-public class MainActivity extends AppCompatActivity implements OnClickListener
-{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     /**
      * Declaring all private view components as well as array adapter
      */
@@ -59,33 +58,21 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Displays the Home Fragment as the default fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.body_container, new HomeFragment()).commit();
-
-        String[] locationNames = new String[]{"Glasgow", "London", "New York", "Oman", "Mauritius", "Bangladesh"};
+      //  parsedListView.setVisibility(View.VISIBLE);
+        String[] locationNames = {"Glasgow", "London", "New York", "Oman", "Mauritius", "Bangladesh"};
         Log.e("MyTag","in onCreate");
         // Set up the raw links to the graphical components
-        Spinner selector = (Spinner)findViewById(R.id.location_selector);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, locationNames);
-        selector.setAdapter(adapter);
-        listView = (ListView) findViewById(R.id.location_list);
-        runApp();
-        listView.setVisibility(View.VISIBLE);
-
-        /**
-         * This function allows the user switch from one view in the navigation menu to another
-         * This is done by the use of onItemSelectedListener and fragments
-         */
-        selector.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Spinner spinner = (Spinner)findViewById(R.id.location_selector);
+        ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, locationNames );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id ) {
-
-
-
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 /**
                  * Switch statement used instead of if statement since there are more than 2 options
-                */
-                switch(position){
+                 */
+                switch (position) {
                     case 0:
                         //if the home menu item is set to null, then the fragment instance changes from null to the Home Fragment
 
@@ -94,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                         break;
                     case 1:
                         //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                       locationUrl = Location.City.LONDON;
+                        locationUrl = Location.City.LONDON;
 
                         break;
                     case 2:
@@ -118,19 +105,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
 
                         break;
 
-
                 }
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //When nothing is selected the default value i.e. GLASGOW will be selected
+
             }
         });
-        Log.e("MyTag","after navigation menu selection");
+       // listView = (ListView) findViewById(R.id.location_list);
+        runApp();
+       // listView.setVisibility(View.VISIBLE);
 
-    } // end of OnCreate method
+
+        }
+
+
+     // end of OnCreate method
 
 
 
@@ -138,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
      * Calls the startProgress method when the start button is envoked
      * @param v
      */
-    @Override
     public void onClick(View v)
     {
         Log.e("MyTag","in onClick");
@@ -146,6 +136,58 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
         listView.setVisibility(View.VISIBLE);
         Log.e("MyTag","after runApp");
     }
+
+    /**
+     * This function allows the user switch from one view in the navigation menu to another
+     * This is done by the use of onItemSelectedListener and fragments
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        /**
+         * Switch statement used instead of if statement since there are more than 2 options
+         */
+        switch (position) {
+            case 0:
+                //if the home menu item is set to null, then the fragment instance changes from null to the Home Fragment
+
+                locationUrl = Location.City.GLASGOW;
+
+                break;
+            case 1:
+                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
+                locationUrl = Location.City.LONDON;
+
+                break;
+            case 2:
+                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
+                locationUrl = Location.City.NEW_YORK;
+
+                break;
+            case 3:
+                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
+                locationUrl = Location.City.OMAN;
+
+                break;
+            case 4:
+                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
+                locationUrl = Location.City.MAURITIUS;
+
+                break;
+            case 5:
+                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
+                locationUrl = Location.City.BANGLADESH;
+
+                break;
+
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+            //When nothing is selected the default value i.e. GLASGOW will be selected
+    }
+
+
     // Need separate thread to access the internet resource over network
     // Other neater solutions should be adopted in later iterations.
     private class Task implements Runnable
@@ -282,9 +324,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                 {
                     e.printStackTrace();
                 }
-
-
-               // FileXmlPullParser.parseData(result);
+                
                 parser.parseData(result);
             }
             catch (InterruptedException e)
@@ -321,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                     listFragment.setArguments(bundle);
 
                     //Tell the activity we are swapping the frameview with our fragment
-                    fragmentTransaction.replace(R.id.body_container, listFragment);
+                    fragmentTransaction.replace(R.id.container, listFragment);
 
                     fragmentTransaction.addToBackStack(null);
 
@@ -331,8 +371,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener
                      **/
                     fragmentTransaction.commit();
 
-                    ItemAdapter list_adapter = new ItemAdapter(MainActivity.this, -1,parser.items);
-                    listView.setAdapter(list_adapter);
+                    //ItemAdapter list_adapter = new ItemAdapter(MainActivity.this, -1,parser.items);
+                    //parsedListView.setAdapter(list_adapter);
 
                     Log.d("post handler", "in thread");
                 }
