@@ -1,6 +1,9 @@
 package org.me.gcu.grantgemmampdseconddiet;
 
 //Imported Libraries
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,57 +61,19 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         View v = inflater.inflate(R.layout.fragment_list, container, false);
 
         String[] locationNames = {"Glasgow", "London", "New York", "Oman", "Mauritius", "Bangladesh"};
-        Spinner spinner = (Spinner) v.findViewById(R.id.location_selector);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.locations, android.R.layout.simple_spinner_dropdown_item );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                /**
-                 * Switch statement used instead of if statement since there are more than 2 options
-                 */
-                switch (position) {
-                    case 0:
-                        //if the home menu item is set to null, then the fragment instance changes from null to the Home Fragment
+      //  Spinner spinner = (Spinner) v.findViewById(R.id.location_selector);
+        // finalArray contains the selection for the spinner
 
-                        locationUrl = Location.City.GLASGOW;
+       // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.locations, android.R.layout.simple_spinner_dropdown_item );
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(adapter);
 
-                        break;
-                    case 1:
-                        //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                        locationUrl = Location.City.LONDON;
+        //initiating variables to view components in the fragment_list.xml file
+        parsedListView = (ListView) v.findViewById(R.id.parsedListView);
+        // Set the adapter here
+        parsedListView.setAdapter(itemAdapter);
 
-                        break;
-                    case 2:
-                        //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                        locationUrl = Location.City.NEW_YORK;
 
-                        break;
-                    case 3:
-                        //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                        locationUrl = Location.City.OMAN;
-
-                        break;
-                    case 4:
-                        //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                        locationUrl = Location.City.MAURITIUS;
-
-                        break;
-                    case 5:
-                        //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                        locationUrl = Location.City.BANGLADESH;
-
-                        break;
-
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         /**
          * checks to see if the items list is empty as well as checking to see if it is null
          * if it is not null and is not null, then the items list is set to clear
@@ -128,8 +93,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
 
 
 
-        //initiating variables to view components in the fragment_list.xml file
-        parsedListView = (ListView) v.findViewById(R.id.parsedListView);
+
 
 
        // highest_temp = (TextView) v.findViewById(R.id.highest_temp);
@@ -142,6 +106,13 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
 
         // the view being returned to the app - the list fragment will display the list of parsed items whether filtered or not
         return v;
+    }
+
+    public static void refreshParentActivity(Context context){
+        Activity parentActivity = (Activity) context;
+        Intent intent = parentActivity.getIntent();
+        parentActivity.finish();
+        context.startActivity(intent);
     }
 
     @Override

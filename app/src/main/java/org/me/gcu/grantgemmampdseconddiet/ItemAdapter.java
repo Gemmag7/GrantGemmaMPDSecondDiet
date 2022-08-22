@@ -59,7 +59,7 @@ public class ItemAdapter extends ArrayAdapter<Item> {
         Date date = new Date();
         System.out.println(dateFormat.format(date));
         TextView locationName = convertView.findViewById(R.id.locationName);
-//        locationName.setText((CharSequence) currentItem.getLocation());
+        locationName.setText(convertView.findViewById(R.id.location_selector));
 
         TextView day1 = (TextView) convertView.findViewById(R.id.day1);
 

@@ -44,9 +44,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private String url1="";
 
     // BBC Weather XML link
-    private String urlSource="https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
-    private String baseUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/";
-
+   // private String urlSource="https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
+    private String baseUrl;
+    String locationID;
 
     private ArrayList<Item> items = new ArrayList<>();
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.e("MyTag","in onCreate");
         // Set up the raw links to the graphical components
         Spinner spinner = (Spinner)findViewById(R.id.location_selector);
-        ArrayAdapter adapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, locationNames );
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.locations, android.R.layout.simple_spinner_dropdown_item );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         break;
 
                 }
+                baseUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/" + Location.getLocationID(locationUrl);
             }
 
             @Override
@@ -146,40 +147,45 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         /**
          * Switch statement used instead of if statement since there are more than 2 options
          */
+
         switch (position) {
             case 0:
                 //if the home menu item is set to null, then the fragment instance changes from null to the Home Fragment
 
                 locationUrl = Location.City.GLASGOW;
+                locationID = Location.getLocationID(locationUrl);
 
                 break;
             case 1:
                 //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
                 locationUrl = Location.City.LONDON;
-
+                locationID = Location.getLocationID(locationUrl);
                 break;
             case 2:
                 //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
                 locationUrl = Location.City.NEW_YORK;
-
+                locationID = Location.getLocationID(locationUrl);
                 break;
             case 3:
                 //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
                 locationUrl = Location.City.OMAN;
-
+                locationID = Location.getLocationID(locationUrl);
                 break;
             case 4:
                 //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
                 locationUrl = Location.City.MAURITIUS;
-
+                locationID = Location.getLocationID(locationUrl);
                 break;
             case 5:
                 //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
                 locationUrl = Location.City.BANGLADESH;
-
+                locationID = Location.getLocationID(locationUrl);
                 break;
 
+
         }
+
+
     }
 
     @Override
@@ -214,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             try
             {
                 Log.e("MyTag","in try");
-                aurl = new URL(baseUrl + Location.getLocationID(locationUrl));
+                aurl = new URL(baseUrl) ;
                 yc = aurl.openConnection();
                 Log.d("yc_open ",yc+"");
                 BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
@@ -241,22 +247,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Log.e("MyTag", "ioexception in run");
             }
 
-            //
-            // Now that you have the xml data you can parse it
-            //
-
-            // Now update the TextView to display raw XML data
-            // Probably not the best way to update TextView
-            // but we are just getting started !
 
             MainActivity.this.runOnUiThread(new Runnable()
             {
                 public void run() {
                     Log.d("UI thread", "I am the UI thread");
-                    //rawDataDisplay.setText(result);
                     //calling the parseData method to display the parsed data
-                    //parseData(result);
-                  //  FileXmlPullParser.parseData(result);
                     parser.parseData(result);
                 }
             });
@@ -294,8 +290,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     // This is where you implement cod for the task
     public void run()
     {
-
-            //final int currentProgressCount = i;
             try
             {
                 Log.e("In HANDLER thread", "in TRY");
@@ -308,7 +302,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                 try
                 {
-                    aurl = new URL(urlSource);
+                    aurl = new URL(Location.getLocationID(locationUrl));
                     yc = aurl.openConnection();
                     in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
 
@@ -324,7 +318,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 {
                     e.printStackTrace();
                 }
-                
+
                 parser.parseData(result);
             }
             catch (InterruptedException e)
@@ -371,8 +365,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                      **/
                     fragmentTransaction.commit();
 
-                    //ItemAdapter list_adapter = new ItemAdapter(MainActivity.this, -1,parser.items);
-                    //parsedListView.setAdapter(list_adapter);
+                   // ItemAdapter list_adapter = new ItemAdapter(MainActivity.this, -1,parser.items);
+                  //  parsedListView.setAdapter(list_adapter);
 
                     Log.d("post handler", "in thread");
                 }

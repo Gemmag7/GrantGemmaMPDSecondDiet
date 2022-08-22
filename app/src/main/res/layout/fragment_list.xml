@@ -24,7 +24,7 @@
         android:layout_height="fill_parent"
         android:orientation="vertical">
 
-        <TextView
+        <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Select a location to view weather forecast:"
@@ -43,7 +43,7 @@
             android:spinnerMode="dropdown"
             android:layout_below="@id/txt_label"
             android:contentDescription="Select a location option from the dropdown menu"
-            />
+            /> -->
 
         <ListView
             android:id="@+id/parsedListView"

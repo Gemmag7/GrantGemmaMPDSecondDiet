@@ -3,7 +3,7 @@
     <string name="navigation_drawer_opened">Open navigation drawer</string>
     <string name="navigation_drawer_closed">Closed navigation drawer</string>
     <string name="salutation_message">Welcome to Mobile Platform Development Assignment 2021 - 2022</string>
-    <string name="app_description">This app displays Traffic Scotland Data for current roadworks and incidents as well as planned roadworks for the future.</string>
+    <string name="app_description">This app displays BBC Weather Data for 3 day weather forecasts for GCU Campus locations.</string>
     <!-- the default blank fragment message when generating a blank fragment -->
     <string name="home_text">Home</string>
     <string name="weather_text">Weather</string>

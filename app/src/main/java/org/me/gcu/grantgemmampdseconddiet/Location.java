@@ -30,19 +30,19 @@ public class Location {
 
         switch (location) {
             case GLASGOW:
-                return "2648579";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
             case LONDON:
-                return "2643743";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2643743";
             case NEW_YORK:
-                return "5128581";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/5128581";
             case OMAN:
-                return "287286";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/287286";
             case MAURITIUS:
-                return "934154";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/934154";
             case BANGLADESH:
-                return "1185241";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/1185241";
             default:
-                return "2648579";
+                return "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/2648579";
         }
 
 
