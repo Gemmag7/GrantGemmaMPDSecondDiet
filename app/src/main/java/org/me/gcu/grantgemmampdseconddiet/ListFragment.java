@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +32,7 @@ import org.me.gcu.grantgemmampdseconddiet.Item;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ListFragment class contains all view components and methods that are needed in order to display the fragment which contains all of the weather parsed data.
@@ -37,16 +40,13 @@ import java.util.ArrayList;
  * a more detailed description of weather for the selected day will display
  * Created on 04/04/2022 by Gemma Grant s2030516
  */
-public class ListFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class ListFragment extends Fragment {
 
     //Initiating all view components
     private ListView parsedListView;
     private ArrayList<Item> items;
     private ItemAdapter itemAdapter;
-    private FileXmlPullParser parser;
-    private TextView highest_temp, lowest_temp, wind_direction, wind_speed, uv_risk, visibility_score, pressure, humidity, condition, sunset, sunrise, pollution;
-
-
+    ListView allLocationsList;
     /**
      *
      * @param inflater which contains the xml file that is being inflated into the view
@@ -64,10 +64,11 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         String[] locationNames = {"Glasgow", "London", "New York", "Oman", "Mauritius", "Bangladesh"};
 
         //initiating variables to view components in the fragment_list.xml file
-        parsedListView = (ListView) v.findViewById(R.id.parsedListView);
+       // parsedListView = (ListView) v.findViewById(R.id.parsedListView);
+       // itemAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
         // Set the adapter here
-        parsedListView.setAdapter(itemAdapter);
-
+        //parsedListView.setAdapter(itemAdapter);
+        //parsedListView.setOnItemClickListener(this);
 
         /**
          * checks to see if the items list is empty as well as checking to see if it is null
@@ -75,7 +76,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
          */
 
         Log.e("items in ListFragment", ": " + items);
-        Log.e("parser.items in ListFragment", ": " + parser.items);
+       // Log.e("parser.items in ListFragment", ": " + parser.items);
         if(items != null && !items.isEmpty()) {
             items.clear();
         }
@@ -83,19 +84,31 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         Bundle bundle = getArguments();
         items = (ArrayList<Item>) bundle.getSerializable("ITEMLIST");
 
-        //
-        itemAdapter = new ItemAdapter(getActivity().getApplicationContext(), R.layout.row_item, items);
+        //setting the item adapter to its context, resource and the data ,
+        ItemAdapter itemAdapter = new ItemAdapter(getActivity().getApplicationContext(), R.layout.fragment_list, items);
 
 
+      //  allLocationsList = (ListView)v.findViewById(R.id.parsedListView) ;
+        ListView listView = (ListView)v.findViewById(R.id.location_list);
+        ListView details_list =(ListView) v.findViewById(R.id.parsedListView);
+        details_list.setAdapter(itemAdapter);
+        Button btnBack = (Button)v.findViewById(R.id.btnBack);
 
-
+        /**
+         * OnClick method used to direct user back to the homepage where the list of cities are displayed.
+         */
+        btnBack.setOnClickListener(view -> {
+            listView.setVisibility(View.VISIBLE);
+            //R.layout.fragment_list = clear();
+            //parsedListView.setVisibility(View.GONE);
+        });
 
 
        // highest_temp = (TextView) v.findViewById(R.id.highest_temp);
 
         //Setting the arrayAdapter to the parsedListView
-        parsedListView.setAdapter(itemAdapter);
-        parsedListView.setOnItemClickListener(this);
+       // listview.setAdapter(itemAdapter);
+      //  parsedListView.setOnItemClickListener(this);
 
 
 
@@ -108,32 +121,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //itemAdapter= new ItemAdapter( getContext(), R.layout.fragment_list, items);
+
     }
-
-
-        @Override
-        public void onItemClick (AdapterView < ? > adapterView, View view,int i, long l){
-
-            //get the item from that index that we clicked in the listview
-            Item itemArray = itemAdapter.getItem(i);
-
-            ArrayList<String> selectedItem = itemArray.getDay();
-
-            itemArray.getDay().get(i);
-
-
-            //Setting the textView to the values of the selected item when a user clicks on a specific incident
-            highest_temp.setText(selectedItem.get(i));
-            //lowest_temp.setText(selectedItem.getMinTemp().get(i));
-            // pressure.setText(selectedItem.getPressure().get(i));
-            //pollution.setText(selectedItem.getPollution().get(i));
-            //condition.setText(selectedItem.getCondition().get(i));
-            //sunrise.setText(selectedItem.getSunrise().get(i));
-            //sunset.setText(selectedItem.getSunset().get(i));
-            //   wind_direction.setText(selectedItem.getWindDirection().get(i));
-            //     wind_speed.setText(selectedItem.getWindSpeed().get(i));
-            //       humidity.setText(selectedItem.getHumidity().get(i));
-
-        } //end of onItemClick method
-
 } //end of ListFragment class

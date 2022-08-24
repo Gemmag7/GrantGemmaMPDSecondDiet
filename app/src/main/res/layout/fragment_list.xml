@@ -9,6 +9,12 @@
     android:background="@color/white"
     tools:context=".ListFragment">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnBack"
+        android:text="Back"
+        />
    <!-- <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,9 +25,8 @@
         android:textStyle="bold"
         />  -->
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="681dp"
         android:orientation="vertical">
 
         <!--TextView
@@ -45,12 +50,24 @@
             android:contentDescription="Select a location option from the dropdown menu"
             /> -->
 
+        <TextView
+            android:id="@+id/locationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/weather_text"
+            android:textColor="@color/teal"
+            android:textSize="30dp"
+            android:textStyle="bold" />
         <ListView
             android:id="@+id/parsedListView"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="wrap_content"
             android:smoothScrollbar="true"
-            />
+            />->
+
+
+
 
 
     </LinearLayout>

@@ -5,7 +5,7 @@
  Created by Gemma Grant s2030516 on 24/08/2022-->
 
 
-<!-- <com.google.android.material.navigation.NavigationView android:id="@+id/navigation_view" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_gravity="start" app:menu="@menu/main_menu" app:headerLayout="@layout/header"/> -->
+   <!-- <com.google.android.material.navigation.NavigationView android:id="@+id/navigation_view" android:layout_width="wrap_content" android:layout_height="match_parent" android:layout_gravity="start" app:menu="@menu/main_menu" app:headerLayout="@layout/header"/> -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
@@ -15,20 +15,20 @@
 
 
 
-    <!-- <TextView
-         android:id="@+id/salutation"
-         android:layout_width="fill_parent"
-         android:layout_height="wrap_content"
-         android:textSize="20sp"
-         android:text="Welcome to Mobile Platform Development Resit Assignment 2021-2022"
-         /> -->
+       <!-- <TextView
+            android:id="@+id/salutation"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Welcome to Mobile Platform Development Resit Assignment 2021-2022"
+            /> -->
 
-    <!--<Button
-        android:id="@+id/startButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Press to get data"
-        /> -->
+        <!--<Button
+            android:id="@+id/startButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Press to get data"
+            /> -->
 
 
     <TextView
@@ -41,41 +41,41 @@
         android:layout_marginRight="8dp"
         android:id="@+id/txt_label"
         />
-    <!-- <Spinner
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:id="@+id/location_selector"
-         android:background="@android:drawable/btn_dropdown"
-         android:layout_marginBottom="16dp"
-         android:spinnerMode="dropdown"
-         android:layout_below="@id/txt_label"
-         android:contentDescription="Select from the dropdown menu"
-         />-->
+   <!-- <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/location_selector"
+        android:background="@android:drawable/btn_dropdown"
+        android:layout_marginBottom="16dp"
+        android:spinnerMode="dropdown"
+        android:layout_below="@id/txt_label"
+        android:contentDescription="Select from the dropdown menu"
+        />-->
 
 
 
-    <!-- <ListView
-         android:id="@+id/list"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"/>-->
+       <!-- <ListView
+            android:id="@+id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>-->
 
 
     <ListView
         android:id="@+id/location_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="664dp"
+        android:layout_height="231dp"
         android:layout_marginTop="56dp"
         android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/location_list"
-        android:layout_marginTop="311dp"
         android:padding="15dp" />
 
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView

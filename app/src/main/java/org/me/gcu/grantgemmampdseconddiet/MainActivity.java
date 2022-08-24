@@ -2,6 +2,7 @@ package org.me.gcu.grantgemmampdseconddiet;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
@@ -35,14 +36,14 @@ import java.util.ArrayList;
  * Created by Gemma Grant s2030516
  * On 07/07/2022
  */
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity {
     /**
      * Declaring all private view components as well as array adapter
      */
-    //private Item_Adapter lAdapter;
+    private ItemAdapter itemAdapter;
     private ListView parsedListView;
     private FileXmlPullParser parser;
-
+    ItemAdapter arrayAdapter;
     //Handler for threading task
     private Handler mHandler;
     private String result = "";
@@ -70,8 +71,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //Setting the content view to the activity_main.xml file
         setContentView(R.layout.activity_main);
 
+        Button btnBack = findViewById(R.id.btnBack);
+        //ConstraintLayout detailed_list = findViewById(R.id.detailed_layout);
         //Calls the runApp thread to begin the parsing of the data
         runApp();
+
+        ItemAdapter ia = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
 
         Log.e("MyTag","in onCreate");
         //baseUrl declared here to be used later in the application
@@ -80,24 +85,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         // Set up the raw links to the graphical components
         //listview is set to the location_list listview component that is in the activity_main.xml file
          listView = (ListView) findViewById(R.id.location_list);
-        } // End of OnCreate method
+        // listView.setOnItemClickListener(this);
+      //  ItemAdapter itemAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
 
-    /**
-     * This method
-     * @param v
-     */
-    public void onClick(View v)
-    {
-        Log.e("MyTag","in onClick");
+       // parsedListView.setAdapter(itemAdapter);
 
-        listView.setVisibility(View.VISIBLE);
 
-        // Log.d("ItemList" , ": " + parser.items);
-        Log.d("ItemList" , ": " + items);
+/**btnBack.setOnClickListener(v -> {
+    listView.setVisibility(View.VISIBLE);
+    //detailed_list.setVisibility(View.GONE);
+});*/
+
+
+    listView.setOnItemClickListener((adapterView, view, i, l) -> {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-
         //creating a new instance of the list fragment here
         ListFragment listFragment = new ListFragment();
 
@@ -119,81 +122,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         /**
          * commiting the fragment transaction
          * The commit() call signals to the FragmentManager that all operations have been added to the transaction.
-         **/
+         */
         fragmentTransaction.commit();
+        //
+        //arrayAdapter = new Item_Adapter(getActivity().getApplicationContext(), R.layout.incident_row, items);
+        arrayAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
 
-        //ItemAdapter list_adapter = new ItemAdapter(MainActivity.this, -1,items);
-        //parsedListView.setAdapter(list_adapter);
-
-        Log.d("post handler", "in thread");
-        Log.e("MyTag","after runApp");
-    }
-
-    /**
-     * This function allows the user switch from one view in the navigation menu to another
-     * This is done by the use of onItemSelectedListener and fragments
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        /**
-         * Switch statement used instead of if statement since there are more than 2 options
+        //initiating variables to view components in the fragment_list.xml file
+        parsedListView = (ListView) view.findViewById(R.id.parsedListView);
 
 
-        switch (position) {
-            case 0:
-                //if the home menu item is set to null, then the fragment instance changes from null to the Home Fragment
-
-                locationUrl = Location.City.GLASGOW;
-                //locationID = Location.getLocationID(locationUrl);
-                Log.e("Glasgow url", ": " + locationID);
-
-                break;
-            case 1:
-                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                locationUrl = Location.City.LONDON;
-                locationID = Location.getLocationID(locationUrl);
-                Log.e("London url", ": " + locationID);
-                //();
-                break;
-            case 2:
-                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                locationUrl = Location.City.NEW_YORK;
-                locationID = Location.getLocationID(locationUrl);
-                Log.e("New York url", ": " + locationID);
-               // runApp(locationID);
-                break;
-            case 3:
-                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                locationUrl = Location.City.OMAN;
-                locationID = Location.getLocationID(locationUrl);
-                Log.e("oman url", ": " + locationID);
-                break;
-            case 4:
-                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                locationUrl = Location.City.MAURITIUS;
-                locationID = Location.getLocationID(locationUrl);
-                Log.e("mauritius url", ": " + locationID);
-                //runApp(locationID);
-                break;
-
-            case 5:
-                //if the weather menu item is set to null, then the fragment instance changes from null to the Weather Fragment
-                locationUrl = Location.City.BANGLADESH;
-                locationID = Location.getLocationID(locationUrl);
-                Log.e("Bangladesh url", ": " + locationID);
-                break;
+        //Setting the arrayAdapter to the parsedListView
+//        parsedListView.setAdapter(arrayAdapter);
+       // parsedListView.setOnItemClickListener(this);
 
 
-        }
-
-        runApp(position);
-
-    }*/
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
+    });
+        //parsedListView.setAdapter(ia);
+    } // End of OnCreate method
 
 
     // Need separate thread to access the internet resource over network
@@ -459,7 +405,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 public void run()
                 {
                     LocationAdapter lAdapter = new LocationAdapter(MainActivity.this, -1, items);
-                   listView.setAdapter(lAdapter);
+                    listView.setAdapter(lAdapter);
+
+                    //ItemAdapter itemAdapter = new ItemAdapter(MainActivity.this, -1, items);
+                    //parsedListView.setAdapter(itemAdapter);
                 }
             });
         }
