@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentResultListener;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,7 +45,7 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
     private ItemAdapter itemAdapter;
     private FileXmlPullParser parser;
     private TextView highest_temp, lowest_temp, wind_direction, wind_speed, uv_risk, visibility_score, pressure, humidity, condition, sunset, sunrise, pollution;
-    Location.City locationUrl = Location.City.GLASGOW;
+
 
     /**
      *
@@ -61,12 +62,6 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         View v = inflater.inflate(R.layout.fragment_list, container, false);
 
         String[] locationNames = {"Glasgow", "London", "New York", "Oman", "Mauritius", "Bangladesh"};
-      //  Spinner spinner = (Spinner) v.findViewById(R.id.location_selector);
-        // finalArray contains the selection for the spinner
-
-       // ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.locations, android.R.layout.simple_spinner_dropdown_item );
-        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
 
         //initiating variables to view components in the fragment_list.xml file
         parsedListView = (ListView) v.findViewById(R.id.parsedListView);
@@ -108,12 +103,6 @@ public class ListFragment extends Fragment implements AdapterView.OnItemClickLis
         return v;
     }
 
-    public static void refreshParentActivity(Context context){
-        Activity parentActivity = (Activity) context;
-        Intent intent = parentActivity.getIntent();
-        parentActivity.finish();
-        context.startActivity(intent);
-    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

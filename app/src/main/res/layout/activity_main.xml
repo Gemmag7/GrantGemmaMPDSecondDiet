@@ -39,7 +39,7 @@
         android:layout_marginRight="8dp"
         android:id="@+id/txt_label"
         />
-    <Spinner
+   <!-- <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/location_selector"
@@ -48,14 +48,14 @@
         android:spinnerMode="dropdown"
         android:layout_below="@id/txt_label"
         android:contentDescription="Select from the dropdown menu"
-        />
+        />-->
 
 
 
        <!-- <ListView
             android:id="@+id/list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"/>-->
 
     <ListView
         android:layout_width="match_parent"
@@ -64,14 +64,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:id="@+id/parsedList"-->
+        android:id="@+id/location_list"/>
 
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/location_selector"
+        android:layout_below="@id/location_list"
         android:padding="15dp" />
 
     <!--<com.google.android.material.bottomnavigation.BottomNavigationView

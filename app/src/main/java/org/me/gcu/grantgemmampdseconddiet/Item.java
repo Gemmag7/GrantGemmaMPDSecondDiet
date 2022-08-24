@@ -13,11 +13,12 @@ public class Item {
 
 
     /**
-     * Declaring the item array list that will hold all data relating to the particular day that the user selects
+     * Declaring the item array list and String location name that will hold all data relating to the particular day that the user selects
      */
-    private ArrayList<String> day = new ArrayList<>(), minTemp = new ArrayList<>(),  maxTemp = new ArrayList<>(), windSpeed = new ArrayList<>(), Pressure = new ArrayList<>(), Humidity = new ArrayList<>(), uv_risk = new ArrayList<>(), condition = new ArrayList<>(), windDirection = new ArrayList<>(), Visibility = new ArrayList<>(), Pollution = new ArrayList<>(), sunrise = new ArrayList<>(), sunset = new ArrayList<>(), location = new ArrayList<>();
+    private ArrayList<String> day = new ArrayList<>(), minTemp = new ArrayList<>(),  maxTemp = new ArrayList<>(), windSpeed = new ArrayList<>(), Pressure = new ArrayList<>(), Humidity = new ArrayList<>(), uv_risk = new ArrayList<>(), condition = new ArrayList<>(), windDirection = new ArrayList<>(), Visibility = new ArrayList<>(), Pollution = new ArrayList<>(), sunrise = new ArrayList<>(), sunset = new ArrayList<>();
+    private String location;
 
-
+    //Getter for obtaining the day for the forecast i.e. today, tomorrow or the day after
     public ArrayList<String> getDay() {
         return day;
     }
@@ -25,7 +26,7 @@ public class Item {
     public void setDay(ArrayList<String> day) {
         this.day = day;
     }
-
+    //Getter for obtaining the minimum temperature for the forecast
     public ArrayList<String> getMinTemp() {
         return minTemp;
     }
@@ -34,6 +35,7 @@ public class Item {
         this.minTemp = minTemp;
     }
 
+    //Getter for obtaining the day for the maximum temperature
     public ArrayList<String> getMaxTemp() {
         return maxTemp;
     }
@@ -42,6 +44,7 @@ public class Item {
         this.maxTemp = maxTemp;
     }
 
+    //Getter for obtaining the windspeed for the forecast
     public ArrayList<String> getWindSpeed() {
         return windSpeed;
     }
@@ -90,6 +93,7 @@ public class Item {
         this.windDirection = windDirection;
     }
 
+    //Getter for obtaining the day for the forecast i.e. today, tomorrow or the day after
     public ArrayList<String> getVisibility() {
         return Visibility;
     }
@@ -98,6 +102,7 @@ public class Item {
         this.Visibility = Visibility;
     }
 
+    //Getter for obtaining the level of pollution for the forecast
     public ArrayList<String> getPollution() {
         return Pollution;
     }
@@ -106,6 +111,7 @@ public class Item {
         this.Pollution = Pollution;
     }
 
+    //Getter for obtaining the time for the sun to rise for the forecast
     public ArrayList<String> getSunrise() {
         return sunrise;
     }
@@ -114,6 +120,7 @@ public class Item {
         this.sunrise = sunrise;
     }
 
+    //Getter for obtaining the time for the sunset for the forecast
     public ArrayList<String> getSunset() {
         return sunset;
     }
@@ -122,11 +129,12 @@ public class Item {
         this.sunset = sunset;
     }
 
-    public ArrayList<String> getLocation() {
+    //Getter for obtaining the location for the forecast
+    public String getLocation() {
         return location;
     }
 
-    public void setLocation(ArrayList<String> location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
@@ -145,7 +153,7 @@ public class Item {
      */
     @Override
     public String toString() {
-        return maxTemp + ", " + minTemp + ", " + Humidity + ", " + Pollution + "," + Pressure + ", " + uv_risk + ", " + windSpeed + "," + windDirection + "," + sunset + "," + sunrise + "," + Visibility;
+        return location + ", " +maxTemp + ", " + minTemp + ", " + Humidity + ", " + Pollution + "," + Pressure + ", " + uv_risk + ", " + windSpeed + "," + windDirection + "," + sunset + "," + sunrise + "," + Visibility;
     }// End of toString Method
 
 

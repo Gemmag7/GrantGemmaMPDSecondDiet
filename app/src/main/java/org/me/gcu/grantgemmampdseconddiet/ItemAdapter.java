@@ -54,16 +54,12 @@ public class ItemAdapter extends ArrayAdapter<Item> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_item, parent, false);
         }
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-        //get current date time with Date()
-        Date date = new Date();
-        System.out.println(dateFormat.format(date));
+
         TextView locationName = convertView.findViewById(R.id.locationName);
-        locationName.setText(convertView.findViewById(R.id.location_selector));
+        locationName.setText(currentItem.getLocation());
+        //locationName.setText(convertView.findViewById(R.id.location_selector.getItemAtPosition));
 
         TextView day1 = (TextView) convertView.findViewById(R.id.day1);
-
-        day1.setText(currentItem.getDay().get(0));
         Log.d("day1", ":" + day1);
         TextView day2 = (TextView) convertView.findViewById(R.id.day2);
         day2.setText(currentItem.getDay().get(1));
