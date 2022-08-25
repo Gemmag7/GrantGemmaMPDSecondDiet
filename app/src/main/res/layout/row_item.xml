@@ -217,7 +217,8 @@
                 android:paddingLeft="5dp"
                 android:textStyle="bold"
                 android:textAllCaps="true"
-                android:height="30dp"/>
+                android:height="30dp"
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -228,7 +229,8 @@
                 android:paddingRight="5dp"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                android:height="30dp"/>
+                android:height="30dp"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -237,10 +239,12 @@
             android:orientation="vertical"
             android:id="@+id/current_day"
             android:clickable="true"
-            android:descendantFocusability="blocksDescendants">
+            android:descendantFocusability="blocksDescendants"
+            >
 
             <TextView
                 android:id="@+id/day1"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:height="30dp"
@@ -259,7 +263,9 @@
                 android:height="30dp"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/min_temp1"
@@ -268,7 +274,9 @@
                 android:height="30dp"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/max_temp1"
@@ -277,7 +285,9 @@
                 android:height="30dp"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/wind_speed1"
@@ -286,7 +296,9 @@
                 android:height="30dp"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
-                android:paddingRight="5dp" />
+                android:paddingRight="5dp"
+                android:paddingBottom="2dp"
+                android:textColor="@color/black"/>
             <TextView
                 android:id="@+id/wind_direction1"
                 android:layout_height="wrap_content"

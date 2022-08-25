@@ -1,6 +1,9 @@
 package org.me.gcu.grantgemmampdseconddiet;
 
 // All imports used for the Item class
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -9,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Gemma Grant S2030516
  * On 20/07/2022
  */
-public class Item {
+public class Item implements Parcelable {
 
 
     /**
@@ -17,6 +20,35 @@ public class Item {
      */
     private ArrayList<String> day = new ArrayList<>(), minTemp = new ArrayList<>(),  maxTemp = new ArrayList<>(), windSpeed = new ArrayList<>(), Pressure = new ArrayList<>(), Humidity = new ArrayList<>(), uv_risk = new ArrayList<>(), condition = new ArrayList<>(), windDirection = new ArrayList<>(), Visibility = new ArrayList<>(), Pollution = new ArrayList<>(), sunrise = new ArrayList<>(), sunset = new ArrayList<>();
     private String location;
+
+    protected Item(Parcel in) {
+        day = in.createStringArrayList();
+        minTemp = in.createStringArrayList();
+        maxTemp = in.createStringArrayList();
+        windSpeed = in.createStringArrayList();
+        Pressure = in.createStringArrayList();
+        Humidity = in.createStringArrayList();
+        uv_risk = in.createStringArrayList();
+        condition = in.createStringArrayList();
+        windDirection = in.createStringArrayList();
+        Visibility = in.createStringArrayList();
+        Pollution = in.createStringArrayList();
+        sunrise = in.createStringArrayList();
+        sunset = in.createStringArrayList();
+        location = in.readString();
+    }
+
+    public static final Creator<Item> CREATOR = new Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 
     //Getter for obtaining the day for the forecast i.e. today, tomorrow or the day after
     public ArrayList<String> getDay() {
@@ -157,4 +189,26 @@ public class Item {
     }// End of toString Method
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeStringList(day);
+        dest.writeStringList(minTemp);
+        dest.writeStringList(maxTemp);
+        dest.writeStringList(windSpeed);
+        dest.writeStringList(Pressure);
+        dest.writeStringList(Humidity);
+        dest.writeStringList(uv_risk);
+        dest.writeStringList(condition);
+        dest.writeStringList(windDirection);
+        dest.writeStringList(Visibility);
+        dest.writeStringList(Pollution);
+        dest.writeStringList(sunrise);
+        dest.writeStringList(sunset);
+        dest.writeString(location);
+    }
 } // End of Item class

@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     // BBC Weather XML link
     private String baseUrl;
 
-     ArrayList<Item> items = new ArrayList<>();
+     private ArrayList<Item> items = new ArrayList<>();
 
     //Declaring listview variable here since multiple listviews are used in application
     ListView listView;
@@ -104,13 +104,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-            Bundle bundle = new Bundle();
-        Intent intent = new Intent(getApplicationContext(), ListDataActivity.class); //(getApplicationContext(), ListDataActivity.class);
+           // Bundle bundle = new Bundle();
+        Intent intent = new Intent(MainActivity.this, ListDataActivity.class); //(getApplicationContext(), ListDataActivity.class);
             //intent.putExtras("ITEMLIST", items);
 
+
             //intent.setClass(MainActivity.this, ListDataActivity.class);
-        intent.putExtra("locationName", locationNames[position]);
-        //intent.putExtra("items", items);
+        //intent.putExtra("locationName", locationNames[position]);
+        intent.putExtra("items", items.get(position));
             //intent.putExtra("condition");
             startActivity(intent);
 
