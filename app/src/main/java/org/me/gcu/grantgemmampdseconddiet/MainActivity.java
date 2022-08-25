@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.SyncStateContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     // BBC Weather XML link
     private String baseUrl;
 
-    private ArrayList<Item> items = new ArrayList<>();
+     ArrayList<Item> items = new ArrayList<>();
 
     //Declaring listview variable here since multiple listviews are used in application
     ListView listView;
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         // listView.setOnItemClickListener(this);
       //  ItemAdapter itemAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
 
-       // parsedListView.setAdapter(itemAdapter);
+       //listView.setAdapter(itemAdapter);
 
 
 /**btnBack.setOnClickListener(v -> {
@@ -97,46 +99,60 @@ public class MainActivity extends AppCompatActivity {
 });*/
 
 
-    listView.setOnItemClickListener((adapterView, view, i, l) -> {
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        //creating a new instance of the list fragment here
-        ListFragment listFragment = new ListFragment();
+    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-        //Create a new bundle which we will be used to pass in the list of items into the list view fragment
-        Bundle bundle = new Bundle();
-        //outSerializable sets the items list to the list view fragment
-        bundle.putSerializable("ITEMLIST", items);
+            Bundle bundle = new Bundle();
+        Intent intent = new Intent(getApplicationContext(), ListDataActivity.class); //(getApplicationContext(), ListDataActivity.class);
+            //intent.putExtras("ITEMLIST", items);
 
-        Log.e("items list" ,": " + items);
-        Log.e("count" ,": " + items.size());
-        //Set the arguments of our fragment to bundle we created with our list
-        listFragment.setArguments(bundle);
-
-        //Tell the activity we are swapping the frameview with our fragment
-        fragmentTransaction.replace(R.id.container, listFragment);
-
-        fragmentTransaction.addToBackStack(null);
-
-        /**
-         * commiting the fragment transaction
-         * The commit() call signals to the FragmentManager that all operations have been added to the transaction.
-         */
-        fragmentTransaction.commit();
-        //
-        //arrayAdapter = new Item_Adapter(getActivity().getApplicationContext(), R.layout.incident_row, items);
-        arrayAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
-
-        //initiating variables to view components in the fragment_list.xml file
-        parsedListView = (ListView) view.findViewById(R.id.parsedListView);
+            //intent.setClass(MainActivity.this, ListDataActivity.class);
+        intent.putExtra("locationName", locationNames[position]);
+        //intent.putExtra("items", items);
+            //intent.putExtra("condition");
+            startActivity(intent);
 
 
-        //Setting the arrayAdapter to the parsedListView
-//        parsedListView.setAdapter(arrayAdapter);
-       // parsedListView.setOnItemClickListener(this);
+            /**
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            //creating a new instance of the list fragment here
+            ListFragment listFragment = new ListFragment();
+
+            //Create a new bundle which we will be used to pass in the list of items into the list view fragment
+            Bundle bundle = new Bundle();
+            //outSerializable sets the items list to the list view fragment
+            bundle.putSerializable("ITEMLIST", items);
+
+            Log.e("items list", ": " + items);
+            Log.e("count", ": " + items.size());
+            //Set the arguments of our fragment to bundle we created with our list
+            listFragment.setArguments(bundle);
+
+            //Tell the activity we are swapping the frameview with our fragment
+            fragmentTransaction.replace(R.id.container, listFragment);
+
+            fragmentTransaction.addToBackStack(null);
+
+            /**
+             * commiting the fragment transaction
+             * The commit() call signals to the FragmentManager that all operations have been added to the transaction.
+
+            fragmentTransaction.commit();
+            //
+            //arrayAdapter = new Item_Adapter(getActivity().getApplicationContext(), R.layout.incident_row, items);
+            arrayAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
+
+            //initiating variables to view components in the fragment_list.xml file
+            parsedListView = (ListView) view.findViewById(R.id.parsedListView);
+            //Setting the arrayAdapter to the parsedListView
+            //        parsedListView.setAdapter(arrayAdapter);
+            // parsedListView.setOnItemClickListener(this);*/
 
 
+        }
     });
         //parsedListView.setAdapter(ia);
     } // End of OnCreate method
