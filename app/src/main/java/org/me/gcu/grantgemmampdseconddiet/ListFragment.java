@@ -104,14 +104,6 @@ public class ListFragment extends Fragment {
         });
 
 
-       // highest_temp = (TextView) v.findViewById(R.id.highest_temp);
-
-        //Setting the arrayAdapter to the parsedListView
-       // listview.setAdapter(itemAdapter);
-      //  parsedListView.setOnItemClickListener(this);
-
-
-
         // the view being returned to the app - the list fragment will display the list of parsed items whether filtered or not
         return v;
     }

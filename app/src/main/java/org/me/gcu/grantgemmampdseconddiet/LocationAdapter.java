@@ -94,13 +94,13 @@ public class LocationAdapter extends ArrayAdapter<Item> {
         else if (currentItem.getCondition().get(0).contains("Light Rain")){
             condition_image.setImageResource(R.drawable.rain);
         }
-        else if (currentItem.getCondition().get(0).contains("thunder")){
+        else if (currentItem.getCondition().get(0).contains("Thunder")){
             condition_image.setImageResource(R.drawable.rain_thunder);
         }
-        else if (currentItem.getCondition().get(0).contains( "sleet")){
+        else if (currentItem.getCondition().get(0).contains( "Sleet")){
             condition_image.setImageResource(R.drawable.sleet);
         }
-        else if (currentItem.getCondition().get(0).contains( "snow")){
+        else if (currentItem.getCondition().get(0).contains( "Snow")){
             condition_image.setImageResource(R.drawable.snow);
         }
         else if (currentItem.getCondition().get(0).contains( "Sunny" )){
@@ -115,12 +115,19 @@ public class LocationAdapter extends ArrayAdapter<Item> {
         else if (currentItem.getCondition().get(0).contains( "fog")){
             condition_image.setImageResource(R.drawable.fog);
         }
-        else if (currentItem.getCondition().get(0).contains( "wind")){
+        else if (currentItem.getCondition().get(0).contains( "Wind")){
             condition_image.setImageResource(R.drawable.wind);
         }
         else if (currentItem.getCondition().get(0).contains( "Sunny Intervals")){
-            condition_image.setImageResource(R.drawable.day_partial_cloud);
+            condition_image.setImageResource(R.drawable.overcast);
         }
+        else if (currentItem.getCondition().get(0).contains( "Partial Rain")){
+            condition_image.setImageResource(R.drawable.rain);
+        }
+        else if (currentItem.getCondition().get(0).contains( "Thundery Showers")){
+            condition_image.setImageResource(R.drawable.rain_thunder);
+        }
+
 
         Log.d("IN_ADAPTER" ,"convertView returned");
 
