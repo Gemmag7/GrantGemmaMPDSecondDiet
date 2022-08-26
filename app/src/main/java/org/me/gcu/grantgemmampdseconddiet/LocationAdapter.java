@@ -1,5 +1,6 @@
 package org.me.gcu.grantgemmampdseconddiet;
 
+//Importing required libraries
 import android.content.Context;
 import android.media.Image;
 import android.os.Build;
@@ -25,7 +26,7 @@ import java.util.List;
 /*
  * Custom Adapter class that is responsible for holding the list of sites after they
  * get parsed out of XML and returns the selected parsed data in a view fragment
- * Created on the 08/08/2022 by Gemma Grant s2030516
+ * Created on the 18/08/2022 by Gemma Grant s2030516
  */
 public class LocationAdapter extends ArrayAdapter<Item> {
 
@@ -48,9 +49,12 @@ public class LocationAdapter extends ArrayAdapter<Item> {
     }
 
 
+
+     //This method gets the view that will be passed to the homepage of the application
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         Item currentItem = getItem(position);
         Log.d("Position", ":" + currentItem);
 
@@ -62,14 +66,9 @@ public class LocationAdapter extends ArrayAdapter<Item> {
         }
 
 
+        //Finding the location of each of the GCU campuses and displaying them
         TextView locationName = convertView.findViewById(R.id.location_name);
         locationName.setText(currentItem.getLocation());
-
-        //Setting the cindition to the textview called condition in the xml file
-        TextView today = (TextView) convertView.findViewById(R.id.day1);
-        //Setting the today to the textview called day1 in the xml file
-//        today.setText(currentItem.getDay().get(0));
-
 
         //Setting the min_temp to the textview called min_temp in the xml file
         TextView min_temp = convertView.findViewById(R.id.min_temp);
@@ -88,7 +87,7 @@ public class LocationAdapter extends ArrayAdapter<Item> {
         ImageView condition_image = (ImageView) convertView.findViewById(R.id.image_condition);
 
         //IF and ELSE IF statements used to determine the condition_image component
-        //Better coding practoce would be to use a SWITCH/CASE statement
+        //Better coding practice would be to use a SWITCH/CASE statement
         if(currentItem.getCondition().get(0).contains("Partly Cloudy")){
             condition_image.setImageResource(R.drawable.day_partial_cloud);
         }
@@ -132,7 +131,7 @@ public class LocationAdapter extends ArrayAdapter<Item> {
 
         Log.d("IN_ADAPTER" ,"convertView returned");
 
-        //retrurns the view to the fragment in order to be displayed
+        //retrurns the view so that the basic weather forecast can be displayed
         return convertView;
     } // End of getView method
 

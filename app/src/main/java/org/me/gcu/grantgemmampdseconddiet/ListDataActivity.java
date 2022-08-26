@@ -1,5 +1,7 @@
 package org.me.gcu.grantgemmampdseconddiet;
-
+//List Data Activity contains the onCreate method that will load the detailed weather forecast for the selected location
+//This is invooked by parent Activity -> MainActivity.java class
+//Created by Gemma Grant s2030516 on 22/08/2022
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,16 +13,12 @@ import java.util.List;
 
 public class ListDataActivity extends AppCompatActivity {
 
-    TextView location;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_data);
 
-
-        Bundle bundle = this.getIntent().getExtras();
-
-
+        //Initiating the intent
         Intent intent = getIntent();
         //Setting the parcelabel extra data to item variable selectedItem
         Item selectedItem = intent.getParcelableExtra("items");
@@ -73,7 +71,6 @@ public class ListDataActivity extends AppCompatActivity {
         /**
          * Setting the text values of the previously declared view components to the selectedItem's data
          */
-
         day1.setText(selectedItem.getDay().get(0));
         day2.setText(selectedItem.getDay().get(1));
         day3.setText(selectedItem.getDay().get(2));
@@ -113,7 +110,7 @@ public class ListDataActivity extends AppCompatActivity {
         sunset2.setText(selectedItem.getSunset().get(1));
         sunset3.setText(selectedItem.getSunset().get(2));
         locationName.setText(selectedItem.getLocation());
-        //max_temp1.setText(intent.getStringExtra("items"));
 
-    }
-}
+    } //End of onCreate method
+
+} //End of ListDataActivity Activity

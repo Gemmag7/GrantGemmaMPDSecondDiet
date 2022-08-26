@@ -77,124 +77,40 @@ public class MainActivity extends AppCompatActivity {
         //Calls the runApp thread to begin the parsing of the data
         runApp();
 
-        ItemAdapter ia = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
-
         Log.e("MyTag","in onCreate");
+
         //baseUrl declared here to be used later in the application
         baseUrl = "https://weather-broker-cdn.api.bbci.co.uk/en/forecast/rss/3day/";
 
         // Set up the raw links to the graphical components
         //listview is set to the location_list listview component that is in the activity_main.xml file
          listView = (ListView) findViewById(R.id.location_list);
-        // listView.setOnItemClickListener(this);
-      //  ItemAdapter itemAdapter = new ItemAdapter(MainActivity.this, R.layout.row_item, items);
 
-       //listView.setAdapter(itemAdapter);
-
-
-/**btnBack.setOnClickListener(v -> {
-    listView.setVisibility(View.VISIBLE);
-    //detailed_list.setVisibility(View.GONE);
-});*/
-
-
-
-    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /**
+         * Method
+         */
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-           // Bundle bundle = new Bundle();
-        Intent intent = new Intent(MainActivity.this, ListDataActivity.class); //(getApplicationContext(), ListDataActivity.class);
-            //intent.putExtras("ITEMLIST", items);
+           // Initiating a new intent and passing in the mainActivity context and the new Activity class
+        Intent intent = new Intent(MainActivity.this, ListDataActivity.class);
 
-
-            //intent.setClass(MainActivity.this, ListDataActivity.class);
-        //intent.putExtra("locationName", locationNames[position]);
+        //passing in the selected location data to the intent
         intent.putExtra("items", items.get(position));
-            //intent.putExtra("condition");
             
             //Starting the list_data_activity that will display the 3-day detailed weather forecast
             startActivity(intent);
-
-
-            
-
-
         }
     });
         
     } // End of OnCreate method
 
-
-    // Need separate thread to access the internet resource over network
-    // Other neater solutions should be adopted in later iterations.
-    private class Task implements Runnable
-    {
-        private String url;
-
-        public Task(String aurl)
-        {
-            url = aurl;
-        }
-
-        @Override
-        public void run()
-        {
-
-            URL aurl;
-            URLConnection yc;
-           // BufferedReader in = null;
-            String inputLine = "";
-
-
-            Log.e("MyTag","in run");
-
-            try
-            {
-                Log.e("MyTag","in try");
-
-                aurl = new URL(baseUrl) ;
-                yc = aurl.openConnection();
-                Log.d("yc_open ",yc+"");
-                BufferedReader in = new BufferedReader(new InputStreamReader(yc.getInputStream()));
-                Log.d("in_open ",in+"");
-                Log.e("MyTag","after ready");
-                //
-                // Now read the data. Make sure that there are no specific hedrs
-                // in the data file that you need to ignore.
-                // The useful data that you need is in each of the item entries
-                //
-                while ((inputLine = in.readLine()) != null)
-                {
-                    result = result + inputLine;
-                    //Log.e("MyTag",inputLine);
-
-                }
-                Log.d("Result", result + " ");
-
-
-                in.close();
-            }
-            catch (IOException ae)
-            {
-                Log.e("MyTag", "ioexception in run");
-            }
-
-
-            MainActivity.this.runOnUiThread(new Runnable()
-            {
-                public void run() {
-                    Log.d("UI thread", "I am the UI thread");
-                    //calling the parseData method to display the parsed data
-                    parser.parseData(result);
-                }
-            });
-        }
-
-    }
-
-
-
+    /**
+     * This method is in charge of getting the input stream to
+     * @param url passed in to the method
+     * @return returns the input stream
+     */
     public InputStream getInputStream(URL url){
         try {
             return url.openConnection().getInputStream();
@@ -204,19 +120,15 @@ public class MainActivity extends AppCompatActivity {
         }
     } //end of getInputStream
 
-// Create Thread to handle the "long running task"
-    // In this case it is a counter that will be used
-    // represent progress via a progress bar
 
     /**
-     * This thread is in charge of
+     * This thread is in charge of running the application
      */
     private void runApp(){
 
+        //instantiating a new instance of handler
         mHandler=new Handler();
-        /**
-         *
-         */
+
     new Thread(new Runnable()
 {
     @Override
@@ -351,12 +263,13 @@ public class MainActivity extends AppCompatActivity {
                             }
                             eventType = pullParser.next();
                         }
+                        // Adds every currentItem variable to the item arraylist until the for loop is completed
                             items.add(item);
 
 
 
 
-                        // Adds every currentItem variable to the item arraylist until the for loop is completed
+
                         //items.add(item);
                         Log.d("ITEMS", ": " +items);
                     }
@@ -380,9 +293,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            // Update the value background thread to UI thread
-            // This is done in a further short life length thread
-            // to ensure the is no blocking of the "calculation" thread
+            //This will inflate the homepage with the basic weather forecast
             mHandler.post(new Runnable()
             {
                 @Override
@@ -390,12 +301,9 @@ public class MainActivity extends AppCompatActivity {
                 {
                     LocationAdapter lAdapter = new LocationAdapter(MainActivity.this, -1, items);
                     listView.setAdapter(lAdapter);
-
-                    //ItemAdapter itemAdapter = new ItemAdapter(MainActivity.this, -1, items);
-                    //parsedListView.setAdapter(itemAdapter);
                 }
             });
-        }
+        } //end of run thread
     }).start();
-}
-}
+} //end of runApp method
+} //end of mainActiivty class

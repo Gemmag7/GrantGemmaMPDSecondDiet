@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * This class obtains all variables, getters & Setters as well as constructors that are needed for an  item found in the rss data feed.
- * Created by Gemma Grant S2030516
- * On 20/07/2022
+ * Created by Gemma Grant S2030516 On 20/07/2022
+ * Thisd class implements the parcelable class so that a selected item and all of its data can be passed to the detailed activity
  */
 public class Item implements Parcelable {
 
@@ -21,6 +21,10 @@ public class Item implements Parcelable {
     private ArrayList<String> day = new ArrayList<>(), minTemp = new ArrayList<>(),  maxTemp = new ArrayList<>(), windSpeed = new ArrayList<>(), Pressure = new ArrayList<>(), Humidity = new ArrayList<>(), uv_risk = new ArrayList<>(), condition = new ArrayList<>(), windDirection = new ArrayList<>(), Visibility = new ArrayList<>(), Pollution = new ArrayList<>(), sunrise = new ArrayList<>(), sunset = new ArrayList<>();
     private String location;
 
+    /**
+     * This creates an Item object that can be passed into the detailed activity by creating a new string array list
+     * @param in
+     */
     protected Item(Parcel in) {
         day = in.createStringArrayList();
         minTemp = in.createStringArrayList();
@@ -38,98 +42,121 @@ public class Item implements Parcelable {
         location = in.readString();
     }
 
+    /**
+     *This method creates the item that will be created to be parcelabel
+     */
     public static final Creator<Item> CREATOR = new Creator<Item>() {
         @Override
         public Item createFromParcel(Parcel in) {
             return new Item(in);
         }
 
+        /**
+         * Creates a new array from the position of the selected Item
+         * @param size an integer value that will be able to find the selected item
+         * @return the selected value of the item
+         */
         @Override
         public Item[] newArray(int size) {
             return new Item[size];
         }
     };
 
-    //Getter for obtaining the day for the forecast i.e. today, tomorrow or the day after
+    //Getter for obtaining the day value for the forecast i.e. today, tomorrow or the day after
     public ArrayList<String> getDay() {
         return day;
     }
 
+    //Setter for setting the day to the weather forecast (i.e. Today, tomorrow and the day after)
     public void setDay(ArrayList<String> day) {
         this.day = day;
     }
-    //Getter for obtaining the minimum temperature for the forecast
+    //Getter for obtaining the minimum temperature value for the forecast
     public ArrayList<String> getMinTemp() {
         return minTemp;
     }
 
+    //Setter for setting the minimum temperature value to the minTemp arrayList
     public void setMinTemp(ArrayList<String> minTemp) {
         this.minTemp = minTemp;
     }
 
-    //Getter for obtaining the day for the maximum temperature
+    //Getter for obtaining the day value for the maximum temperature
     public ArrayList<String> getMaxTemp() {
         return maxTemp;
     }
 
+    //Setter for setting the maximum temperature value to the maxTemp arrayList
     public void setMaxTemp(ArrayList<String> maxTemp) {
         this.maxTemp = maxTemp;
     }
 
-    //Getter for obtaining the windspeed for the forecast
+    //Getter for obtaining the windSpeed value for the forecast
     public ArrayList<String> getWindSpeed() {
         return windSpeed;
     }
 
+    //Setter for setting the wind speed value to the windSpeed arrayList
     public void setWindSpeed(ArrayList<String> windSpeed) {
         this.windSpeed = windSpeed;
     }
 
+    //Getter for obtaining the Pressure value for the forecast
     public ArrayList<String> getPressure() {
         return Pressure;
     }
 
+    //Setter for setting the pressure value to the Pressure arrayList
     public void setPressure(ArrayList<String> Pressure) {
         this.Pressure = Pressure;
     }
 
+    //Getter for obtaining the humidity value for the forecast
     public ArrayList<String> getHumidity() {
         return Humidity;
     }
 
+    //Setter for setting the Humidity value to the Humidity arrayList
     public void setHumidity(ArrayList<String> Humidity) {
         this.Humidity = Humidity;
     }
 
+    //Getter for obtaining the uv_risk value for the forecast
     public ArrayList<String> getUvrisk() {
         return uv_risk;
     }
 
+    //Setter for setting the uv_risk value to the uv_risk arrayList
     public void setUvrisk(ArrayList<String> uv_risk) {
         this.uv_risk = uv_risk;
     }
 
+    //Getter for obtaining the condition value for the forecast
     public ArrayList<String> getCondition() {
         return condition;
     }
 
-    public void setRain(ArrayList<String> condition) {
+    //Setter for setting the condition values to the condition arrayList
+    public void setCondition(ArrayList<String> condition) {
         this.condition = condition;
     }
 
+    //Getter for obtaining the windDirection value for the forecast
     public ArrayList<String> getWindDirection() {
         return windDirection;
     }
 
+    //Setter for setting the wind direction value to the windDirection arrayList
     public void setWindDirection(ArrayList<String> windDirection) {
         this.windDirection = windDirection;
     }
 
-    //Getter for obtaining the day for the forecast i.e. today, tomorrow or the day after
+    //Getter for obtaining the visibility value for the forecast
     public ArrayList<String> getVisibility() {
         return Visibility;
     }
 
+    //Setter for setting the visibility value to the Visibility arrayList
     public void setVisibility(ArrayList<String> Visibility) {
         this.Visibility = Visibility;
     }
@@ -139,6 +166,7 @@ public class Item implements Parcelable {
         return Pollution;
     }
 
+    //Setter for setting the pollution value to the Pollution arrayList
     public void setPollution(ArrayList<String> Pollution) {
         this.Pollution = Pollution;
     }
@@ -148,6 +176,7 @@ public class Item implements Parcelable {
         return sunrise;
     }
 
+    //Setter for setting the sunrise value to the sunrise arrayList
     public void setSunrise(ArrayList<String> sunrise) {
         this.sunrise = sunrise;
     }
@@ -157,15 +186,17 @@ public class Item implements Parcelable {
         return sunset;
     }
 
+    //Setter for setting the sunset value to the sunset arrayList
     public void setSunset(ArrayList<String> sunset) {
         this.sunset = sunset;
     }
 
-    //Getter for obtaining the location for the forecast
+    //Getter for obtaining the string location value for the forecast
     public String getLocation() {
         return location;
     }
 
+    //Setter for setting the string location value to the location variable
     public void setLocation(String location) {
         this.location = location;
     }
@@ -189,11 +220,17 @@ public class Item implements Parcelable {
     }// End of toString Method
 
 
+    //This is one of the many implemented Parcelable methods that is essential for the parcelable to be utilised in the application
     @Override
     public int describeContents() {
         return 0;
     }
 
+    /**
+     * This method creates the arraylist that has to be created to be passed into the detailed activity class
+     * @param dest is the destination to where the string list is sending the variables
+     * @param flags
+     */
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeStringList(day);
@@ -210,5 +247,6 @@ public class Item implements Parcelable {
         dest.writeStringList(sunrise);
         dest.writeStringList(sunset);
         dest.writeString(location);
-    }
+    } //End of writeToParcel method
+
 } // End of Item class

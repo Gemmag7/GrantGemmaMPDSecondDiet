@@ -22,7 +22,7 @@ import java.util.List;
 /*
  * Custom Adapter class that is responsible for holding the list of sites after they
  * get parsed out of XML and returns the selected parsed data in a view fragment
- * Created on the 01/04/2022 by Gemma Grant s2030516
+ * Created on the 21/08/2022 by Gemma Grant s2030516
  */
 public class ItemAdapter extends ArrayAdapter<Item> implements View.OnClickListener{
 
@@ -38,12 +38,23 @@ public class ItemAdapter extends ArrayAdapter<Item> implements View.OnClickListe
         resourceInt = resource;
     }
 
+    /**
+     * On click method that will be used to indicate to the detailed weather forecast
+     * @param v is the view that is to be passed in
+     */
     @Override
     public void onClick(View v) {
         int position=(Integer) v.getTag();
         Object item = getItem(position);
     }
 
+    /**
+     *
+     * @param position is an integer value that will be used to find the selected_item that is to be displayed for the detailed 3-day weather forecast
+     * @param convertView is the view
+     * @param parent
+     * @return the view to be displayed
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -57,22 +68,12 @@ public class ItemAdapter extends ArrayAdapter<Item> implements View.OnClickListe
              LayoutInflater inflater = LayoutInflater.from(getContext());
              convertView = inflater.inflate(R.layout.row_item, parent, false);
          }
-        /**
-         * Initiating the textviews from the .xml file in the layout folder
-         */
 
         Log.d("Position", ":" + position);
 
         /**
          * Inflating the views from the layout in order to display the listview
          */
-
-
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.row_item, parent, false);
-        }
-
-
         TextView locationName = (TextView) convertView.findViewById(R.id.locationName);
         locationName.setText(getItem(position).getLocation());
         TextView day1 =(TextView) convertView.findViewById(R.id.day1);
@@ -83,12 +84,12 @@ public class ItemAdapter extends ArrayAdapter<Item> implements View.OnClickListe
         TextView day3 = (TextView)convertView.findViewById(R.id.day3);
         day3.setText(getItem(position).getDay().get(2));
 
-        TextView temp1 = (TextView)convertView.findViewById(R.id.min_temp1);
-        temp1.setText(getItem(position).getMinTemp().get(0));
-        TextView temp2 = (TextView)convertView.findViewById(R.id.min_temp2);
-        temp2.setText(getItem(position).getMinTemp().get(1));
-        TextView temp3 = (TextView)convertView.findViewById(R.id.min_temp3);
-        temp3.setText(getItem(position).getMinTemp().get(2));
+        TextView min_temp1 = (TextView)convertView.findViewById(R.id.min_temp1);
+        min_temp1.setText(getItem(position).getMinTemp().get(0));
+        TextView min_temp2 = (TextView)convertView.findViewById(R.id.min_temp2);
+        min_temp2.setText(getItem(position).getMinTemp().get(1));
+        TextView min_temp3 = (TextView)convertView.findViewById(R.id.min_temp3);
+        min_temp3.setText(getItem(position).getMinTemp().get(2));
 
         TextView max_temp1 = (TextView)convertView.findViewById(R.id.max_temp1);
         max_temp1.setText(getItem(position).getMaxTemp().get(0));

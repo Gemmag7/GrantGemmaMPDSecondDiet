@@ -3,7 +3,8 @@ package org.me.gcu.grantgemmampdseconddiet;
 /**
  * This class is used to parse the xml data provided into an arraylist that can be used in the application
  * The data is parsed via the parseData method which produces the 'items' array list that is then called in another class
- * Created on the 14/07/2022 By Gemma Grant s2030516
+ * Created on the 14/08/2022 By Gemma Grant s2030516
+ * Not used in Application anymore
  */
 
 // Importing required libraries
