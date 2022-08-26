@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Detailed weather forecast view that looks like an list, but is instead made up of several Linear Layouts and TextViews
+    Created by Gemma Grant s2030516 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -111,7 +113,7 @@
                     android:paddingRight="5dp"
                     android:text="Wind Speed"
                     android:textAllCaps="true"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
                 <TextView
@@ -469,7 +471,10 @@
                     android:height="30dp"
                     android:paddingTop="5dp"
                     android:paddingRight="5dp"
-                    android:paddingLeft="5dp"/>
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

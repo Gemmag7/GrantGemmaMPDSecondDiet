@@ -89,8 +89,8 @@ public class LocationAdapter extends ArrayAdapter<Item> {
 
         //IF and ELSE IF statements used to determine the condition_image component
         //Better coding practoce would be to use a SWITCH/CASE statement
-        if(currentItem.getCondition().get(0).contains("Light Cloud")){
-            condition_image.setImageResource(R.drawable.cloudy);
+        if(currentItem.getCondition().get(0).contains("Partly Cloudy")){
+            condition_image.setImageResource(R.drawable.day_partial_cloud);
         }
         else if (currentItem.getCondition().get(0).contains("Light Rain")){
             condition_image.setImageResource(R.drawable.rain);

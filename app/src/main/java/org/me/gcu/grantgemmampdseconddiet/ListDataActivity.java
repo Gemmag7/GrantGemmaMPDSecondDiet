@@ -17,18 +17,20 @@ public class ListDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_data);
 
+
         Bundle bundle = this.getIntent().getExtras();
 
 
         Intent intent = getIntent();
+        //Setting the parcelabel extra data to item variable selectedItem
         Item selectedItem = intent.getParcelableExtra("items");
 
+        //To keep track of the selected location
         System.out.println(selectedItem);
         /**
          * Declaring all view components here
          */
         TextView locationName = (TextView) findViewById(R.id.locationName);
-
         TextView day1 =(TextView) findViewById(R.id.day1);
         TextView day2 = (TextView)findViewById(R.id.day2);
         TextView day3 = (TextView)findViewById(R.id.day3);
